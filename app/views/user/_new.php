@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -23,6 +23,10 @@
                     <?= form_input( array('name' => 'email', 'type' => 'email', 'id' => 'email', 'placeholder' => "example@company.com", 'required' => '', 'class' => 'form-control', ), set_value('email'));?>
                 </div>
                 <div class="form-group">
+                    <label for="emailaddress">Email</label>
+                    <?= form_input( array('name' => 'phone', 'type' => 'text', 'id' => 'phone', 'placeholder' => "example@company.com", 'required' => '', 'class' => 'form-control', ), set_value('phone'));?>
+                </div>
+                <div class="form-group">
                     <label for="password">Senha</label>
                     <?= form_password(array('name' => 'password', 'required' => '', 'id' => 'password', 'class' => 'form-control', 'placeholder'=>"Senha"));?>
                 </div>
@@ -34,7 +38,7 @@
             <div class="modal-footer">
                 <div class="text-right">
                     <button type="reset" class="btn btn-danger waves-effect waves-light">Reset</button>
-                    <button type="submit" class="btn btn-success waves-effect waves-light">Submeter</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Salvar</button>
                 </div>
             </div>
 

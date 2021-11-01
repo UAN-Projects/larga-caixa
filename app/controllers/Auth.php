@@ -38,6 +38,7 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules('username', '', 'required');
         $this->form_validation->set_rules('first_name', '', 'required|is_unique[users.username]');
         $this->form_validation->set_rules('email', '', 'trim|required|is_unique[users.email]');
+        $this->form_validation->set_rules('phone', '', 'required');
         $this->form_validation->set_rules('password', 'Senha', 'required|min_length[5]|max_length[255]');
         $this->form_validation->set_rules('confirm_password', 'Confirmar Senha', 'matches[password]');
 
@@ -49,6 +50,7 @@ class Auth extends CI_Controller {
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'username' => $this->input->post('username'),
+                'phone' => $this->input->post('phone'),
             );
 
             $additional_data = $this->security->xss_clean($additional_data);

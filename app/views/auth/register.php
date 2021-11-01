@@ -26,6 +26,9 @@
                 <div class="form-group">
                     <label for="emailaddress">Email</label>
                     <?= form_input( array('name' => 'email', 'type' => 'email', 'id' => 'email', 'placeholder' => "example@company.com", 'required' => '', 'class' => 'form-control', ), set_value('email'));?>
+                </div><div class="form-group">
+                    <label for="emailaddress">Email</label>
+                    <?= form_input( array('name' => 'phone', 'type' => 'text', 'id' => 'phone', 'placeholder' => "example@company.com", 'required' => '', 'class' => 'form-control', ), set_value('phone'));?>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
