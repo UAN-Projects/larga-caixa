@@ -5,7 +5,8 @@ class User extends CI_Controller
 
     public function index()
     {
-            
+        if($this->ion_auth->logged_in()) redirect('dashboard');
+        
         $this->form_validation->set_rules('username', '', 'trim');
         $this->form_validation->set_rules('first_name', '', 'trim|required');
         $this->form_validation->set_rules('email', '', 'trim|required|is_unique[users.email]');
@@ -40,6 +41,11 @@ class User extends CI_Controller
         );
 		$this->load->view('auth', $data);
 		// $this->load->view('layout', $data);
+        // $this->load->view('auth',
+        //     array_merge($data, 
+        //         array('users' => $this->ion_auth->users()->result()),
+        //     )
+        // );
     }
 
 	public function show($id=NULL) {

@@ -1,109 +1,74 @@
-<div class="container">
-    <main>
+<div class="row">
+    <div class="col-12">
         <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="icon icon-info"> Utilizadores</span>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">
-                    Registar
-                </button>
-            </div>
             <div class="card-body">
-                <?php if(isset($users)) { ?>
-                <table class="table table-hover">
+                <h4 class="header-title">Scroll - Vertical</h4>
+                <p class="text-muted font-13 mb-4">
+                    This example shows the DataTables table body scrolling in the vertical direction. This can generally be seen as an
+                    alternative method to pagination for displaying a large table in a fairly small vertical area, and as such
+                    pagination has been disabled here (note that this is not mandatory, it will work just fine with pagination enabled
+                    as well!).
+                </p>
+
+                <table id="scroll-vertical-datatable" class="table dt-responsive nowrap">
                     <thead>
                         <tr>
-                            <th>username</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
-                            <th>Acção</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
                         </tr>
                     </thead>
+                
+                
                     <tbody>
-                        
-                        <?php foreach ($users as $user): ?>
                         <tr>
-                            <td><?= $user->username; ?></td>
-                            <td><?= $user->email; ?></td>
-                            <td><?= $user->phone; ?></td>
-                            <td class="actions text-end">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Opções
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                        <li><a class="dropdown-item" href="<?= base_url("user/show/$user->id")?>">Visualizar</a></li>
-                                        <li><a class="dropdown-item" href="#">Editar</a></li>
-                                    </ul>
-                                </div>
-                            </td>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            <td>Edinburgh</td>
+                            <td>61</td>
+                            <td>2011/04/25</td>
+                            <td>$320,800</td>
                         </tr>
-                        <?php endforeach;  ?>
+                        <tr>
+                            <td>Garrett Winters</td>
+                            <td>Accountant</td>
+                            <td>Tokyo</td>
+                            <td>63</td>
+                            <td>2011/07/25</td>
+                            <td>$170,750</td>
+                        </tr>
+                        <tr>
+                            <td>Ashton Cox</td>
+                            <td>Junior Technical Author</td>
+                            <td>San Francisco</td>
+                            <td>66</td>
+                            <td>2009/01/12</td>
+                            <td>$86,000</td>
+                        </tr>
+                        <tr>
+                            <td>Cedric Kelly</td>
+                            <td>Senior Javascript Developer</td>
+                            <td>Edinburgh</td>
+                            <td>22</td>
+                            <td>2012/03/29</td>
+                            <td>$433,060</td>
+                        </tr>
+                        <tr>
+                            <td>Donna Snider</td>
+                            <td>Customer Support</td>
+                            <td>New York</td>
+                            <td>27</td>
+                            <td>2011/01/25</td>
+                            <td>$112,000</td>
+                        </tr>
                     </tbody>
                 </table>
-                <?php }  ?>
-            </div>
-        </div>
-    </main>
-</div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="createUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Novo Utilizzador</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <?#= form_open("$class/$method"); ?>
-      <?= form_open("user/index"); ?>
-        
-        <div class="modal-body">
-        <?= validation_errors('<code>', '</code>'); ?>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label">Nome</label>
-                        <?= form_input(array('name' => 'first_name', 'class' => 'form-control'), set_value('first_name'));?>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label">Email</label>
-                        <?= form_input(array('name' => 'email', 'class' => 'form-control'), set_value('email'));?>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label">Username</label>
-                        <?= form_input(array('name' => 'username', 'class' => 'form-control'), set_value('username'));?>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label">Senha\</label>
-                        <?= form_input(array('name' => 'password', 'class' => 'form-control'));?>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label">Confirmar Senha</label>
-                        <?= form_input(array('name' => 'confirm_password', 'class' => 'form-control'));?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a href="<?= base_url("user/index") ?>" class="btn btn-default pull-right" data-bs-dismiss="modal"> Cancelar </a>
-            <?= form_submit(array('name'=>'salvar'), 'Salvar', array('class' => 'btn btn-primary'));?>
-        </div>
-      <?= form_close(); ?>
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
     </div>
-  </div>
-</div>
+    <!-- end row-->

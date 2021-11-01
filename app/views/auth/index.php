@@ -5,35 +5,34 @@
             
             <div class="text-center w-75 m-auto">
                 <a href="index.html">
-                    <span><img src="assets/images/logo-light.png" alt="" height="22"></span>
+                    <span><img src="<?= base_url("assets/images/logo-light.png")?>" alt="" height="22"></span>
                 </a>
-                <p class="text-muted mb-4 mt-3">Enter your email address and password to access admin panel.</p>
+                <p class="text-muted mb-4 mt-3">Por favor entre com seu login/email e senha abaixo.</p>
+                <p>
+                <?php if( $this->session->flashdata('message')) { ?>
+                    <?= $this->session->flashdata('message'); ?>
+                <?php } ?>
+                </p>
             </div>
 
-            <form action="#">
+            <!-- <form action="#"> -->
+            <?= form_open("auth/login"); ?>
+                <?= validation_errors('<code>', '</code>'); ?>
 
                 <div class="form-group mb-3">
-                    <label for="emailaddress">Email address</label>
-                    <input class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
+                    <label for="emailaddress">Username</label>
+                    <?= form_input( array('name' => 'identity', 'type' => 'text', 'id' => 'identity', 'required' => '', 'class' => 'form-control', 'placeholder'=>"Enter your email"), set_value('identity'));?>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="password">Password</label>
-                    <input class="form-control" type="password" required="" id="password" placeholder="Enter your password">
-                </div>
-
-                <div class="form-group mb-3">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked>
-                        <label class="custom-control-label" for="checkbox-signin">Remember me</label>
-                    </div>
+                    <?= form_password(array('name' => 'password', 'required' => '', 'id' => 'password', 'class' => 'form-control', 'placeholder'=>"Senha"));?>
                 </div>
 
                 <div class="form-group mb-0 text-center">
-                    <button class="btn btn-primary btn-block" type="submit"> Log In </button>
+                    <button class="btn btn-primary btn-block" type="submit"> Entrar </button>
                 </div>
-
-            </form>
+            <?= form_close(); ?>
 
         </div> <!-- end card-body -->
     </div>
@@ -41,8 +40,7 @@
 
     <div class="row mt-3">
         <div class="col-12 text-center">
-            <p> <a href="pages-recoverpw.html" class="text-muted ml-1">Forgot your password?</a></p>
-            <p class="text-muted">Don't have an account? <a href="pages-register.html" class="text-primary font-weight-medium ml-1">Sign Up</a></p>
+            <p class="text-muted">Não possui ainda uma conta? <a href="<?= base_url("auth/register")?>" class="text-primary font-weight-medium ml-1">Sign Up</a></p>
         </div> <!-- end col -->
     </div>
     <!-- end row -->

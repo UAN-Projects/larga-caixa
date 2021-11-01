@@ -27,7 +27,7 @@
 		"classmap":["system"]
 	},
 	"scripts":{
-		"dev":"php -S localhost:3000",
+		"dev":"php -S localhost:4000",
         "db:migrate":"php index.php ci db",
         "db:drop":"php index.php ci db drop",
 		"db:restart":"php index.php ci db restart",
