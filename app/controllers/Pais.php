@@ -2,10 +2,11 @@
 
 class Pais extends CI_Controller
 {
-    protected $data = [];
+protected $data = [];
 
     public function __construct() {
         parent::__construct();
+        if(!$this->ion_auth->is_admin()) redirect();
         $this->load->model('Pais_model');
         $this->data['class'] = strtolower(__CLASS__);
     }
@@ -43,14 +44,12 @@ class Pais extends CI_Controller
         $this->form_validation->set_rules('nome', 'Nome', 'required');
 
         if ($this->form_validation->run()) {
-            $create_data = elements(array('nome'), $this->security->xss_clean($this->input->post()));
+            $update_data = elements(array('nome'), $this->security->xss_clean($this->input->post()));
 
-            if ($this->Pais_model->update($create_data, $id)) {
+            if ($this->Pais_model->update($update_data, $id)) {
                 $this->session->set_tempdata('notify', __CLASS__.",success, Sucesso!", 1);
             } else {
-                if(validation_errors()) {
-                    $this->session->set_tempdata('notify', __CLASS__.",error, Erro!", 1);
-                }
+                $this->session->set_tempdata('notify', __CLASS__.",error, Erro!", 1);
             }
         }
 
@@ -59,13 +58,11 @@ class Pais extends CI_Controller
     }
 
 
-    public function delete($user_id)
+    public function delete($id)
     {
-
-        ($this->Pais_model->delete($user_id))
+        ($this->Pais_model->delete($id))
         ? $this->session->set_flashdata('sucesso', 'Sucesso!') 
         : $this->session->set_flashdata('error', 'Erro na operação!');
-
         redirect('pais');
     }
 }

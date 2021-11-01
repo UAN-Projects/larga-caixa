@@ -1,5 +1,5 @@
-<?php foreach ($users as $user): ?>
-  <div class="modal fade" id="<?= $user->username ?>" tabindex="-1" role="dialog" aria-labelledby="<?= $user->username ?>" aria-hidden="true">
+<?php foreach ($items as $row): ?>
+  <div class="modal fade" id="update<?= $row->id ?>" tabindex="-1" role="dialog" aria-labelledby="update<?= $row->id ?>" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,16 +8,16 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <?= form_open("$class/update/$user->id"); ?>
+        <?= form_open("$class/update/$row->id"); ?>
           <?= validation_errors('<code>', '</code>'); ?>
               <div class="modal-body">
                   <div class="form-group">
                       <label for="fullname">Nome</label>
-                      <?= form_input( array('name' => 'first_name', 'type' => 'text', 'id' => 'first_name', 'placeholder' => "Nome", 'required' => '', 'class' => 'form-control', ), set_value('first_name', $user->first_name));?>
+                      <?= form_input( array('name' => 'first_name', 'type' => 'text', 'id' => 'first_name', 'placeholder' => "Nome", 'required' => '', 'class' => 'form-control', ), set_value('first_name', $row->first_name));?>
                   </div>
                   <div class="form-group">
                       <label for="fullname">Telefone</label>
-                      <?= form_input( array('name' => 'phone', 'type' => 'text', 'id' => 'phone', 'placeholder' => "example@company.com", 'required' => '', 'class' => 'form-control', ), set_value('phone', $user->phone));?>
+                      <?= form_input( array('name' => 'phone', 'type' => 'text', 'id' => 'phone', 'placeholder' => "example@company.com", 'required' => '', 'class' => 'form-control', ), set_value('phone', $row->phone));?>
                   </div>
               </div>
               <div class="modal-footer">

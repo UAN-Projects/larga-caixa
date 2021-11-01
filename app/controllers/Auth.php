@@ -60,7 +60,7 @@ class Auth extends CI_Controller {
                 $this->session->set_tempdata('notify', __CLASS__.",success, Bem Vindo!!!", 1);
                 redirect('auth');
             } else {
-                $this->session->set_flashdata('form_error', $this->ion_auth->errors());
+                $this->session->set_tempdata('notify', __CLASS__.",error, Erro!", 1);
                 redirect('auth/register');
             }
         }

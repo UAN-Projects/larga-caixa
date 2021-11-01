@@ -216,7 +216,7 @@
     <?php if( $method == 'index' ) { ?>
     <script>
         $(document).ready(function(){
-            $("#createModal").click();
+            $("#createModalId").click();
         });
     </script>
     <?php } else if($method == 'update') { ?>

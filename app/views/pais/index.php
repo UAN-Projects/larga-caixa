@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
 				<div class="d-flex align-items-center justify-content-between mb-2">
-					<button type="button" class="btn btn-primary" id="open-modal" data-toggle="modal" data-target="#createModal" data-whatever="@mdo"><i class="mdi mdi-plus-circle mr-1"></i> Add</button>
+					<button type="button" class="btn btn-primary" id="createModalId" data-toggle="modal" data-target="#createModal" data-whatever="@mdo"><i class="mdi mdi-plus-circle mr-1"></i> Adcionar</button>
 					<h4 class="header-title"><?= $class ?></h4>
 				</div>
 

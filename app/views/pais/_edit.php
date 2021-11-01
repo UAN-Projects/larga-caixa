@@ -1,5 +1,5 @@
 <?php foreach ($items as $row): ?>
-  <div class="modal fade" id="update<?= $row->id ?>" tabindex="-1" role="dialog" aria-labelledby="edvaldo" aria-hidden="true">
+  <div class="modal fade" id="update<?= $row->id ?>" tabindex="-1" role="dialog" aria-labelledby="update<?= $row->id ?>" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

@@ -1,4 +1,4 @@
-<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -23,8 +23,8 @@
                     <?= form_input( array('name' => 'email', 'type' => 'email', 'id' => 'email', 'placeholder' => "example@company.com", 'required' => '', 'class' => 'form-control', ), set_value('email'));?>
                 </div>
                 <div class="form-group">
-                    <label for="emailaddress">Email</label>
-                    <?= form_input( array('name' => 'phone', 'type' => 'text', 'id' => 'phone', 'placeholder' => "example@company.com", 'required' => '', 'class' => 'form-control', ), set_value('phone'));?>
+                    <label for="emailaddress">Telefone</label>
+                    <?= form_input( array('name' => 'phone', 'type' => 'text', 'id' => 'phone', 'placeholder' => "xxx xxx xxx", 'required' => '', 'class' => 'form-control', ), set_value('phone'));?>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>

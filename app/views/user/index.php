@@ -3,8 +3,8 @@
         <div class="card">
             <div class="card-body">
 				<div class="d-flex align-items-center justify-content-between mb-2">
-					<button type="button" class="btn btn-primary" id="open-modal" data-toggle="modal" data-target="#createUserModal" data-whatever="@mdo"><i class="mdi mdi-plus-circle mr-1"></i> Add</button>
-					<h4 class="header-title">Utilizadores</h4>
+					<button type="button" class="btn btn-primary" id="createModalId" data-toggle="modal" data-target="#createModal" data-whatever="@mdo"><i class="mdi mdi-plus-circle mr-1"></i> Adicionar</button>
+					<h4 class="header-title"><?= $class ?></h4>
 				</div>
 
                 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
@@ -20,12 +20,12 @@
                 
                 
                     <tbody>
-					<?php foreach ($users as $user): ?>
+					<?php foreach ($items as $item): ?>
                         <tr>
-                            <td> <?= $user->first_name?> </td>
-                            <td> <?= $user->email?> </td>
-                            <td> <?= ($user->active)? 'ativo' : 'desativo' ?> </td>
-                            <td> <?= date("Y-m-d H:i:s", $user->last_login); ?> </td>
+                            <td> <?= $item->first_name?> </td>
+                            <td> <?= $item->email?> </td>
+                            <td> <?= ($item->active)? 'ativo' : 'desativo' ?> </td>
+                            <td> <?= date("Y-m-d H:i:s", $item->last_login); ?> </td>
                             <td class="text-right">
 								<div class="btn-group">
 									<button 
@@ -34,12 +34,12 @@
 										data-toggle="dropdown" 
 										aria-haspopup="true" 
 										aria-expanded="false"
-									>Acções
+									> Acções
 									</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="<?= base_url("user/show/$user->id"); ?>">Visualizar</a>
-										<a class="dropdown-item" href="#" id="open-modal" data-toggle="modal" data-target="#<?= $user->username ?>" data-whatever="@mdo">Editar</a>
-										<a class="dropdown-item text-danger" href="<?= base_url("user/delete/$user->id"); ?>">Eliminar</a>
+										<a class="dropdown-item" href="<?= base_url("$class/show/$item->id"); ?>">Visualizar</a>
+										<a class="dropdown-item" href="#" id="updateModal<?= $item->id ?>" data-toggle="modal" data-target="#update<?= $item->id ?>" data-whatever="@mdo">Editar</a>
+										<a class="dropdown-item text-danger" href="<?= base_url("$class/delete/$item->id"); ?>">Eliminar</a>
 									</div>
 								</div>
 							</td>
