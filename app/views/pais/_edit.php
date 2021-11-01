@@ -1,19 +1,19 @@
-<?php foreach ($paises as $pais): ?>
-  <div class="modal fade" id="<?= $pais->nome ?>" tabindex="-1" role="dialog" aria-labelledby="<?= $pais->nome ?>" aria-hidden="true">
+<?php foreach ($items as $row): ?>
+  <div class="modal fade" id="update<?= $row->id ?>" tabindex="-1" role="dialog" aria-labelledby="edvaldo" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar Utilizador</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar <?= __CLASS__ ?></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <?= form_open("$class/update/$pais->id"); ?>
+        <?= form_open("$class/update/$row->id"); ?>
           <?= validation_errors('<code>', '</code>'); ?>
               <div class="modal-body">
                   <div class="form-group">
                       <label for="fullname">Nome</label>
-                      <?= form_input( array('name' => 'nome', 'type' => 'text', 'id' => 'nome', 'placeholder' => "Nome", 'required' => '', 'class' => 'form-control', ), set_value('nome', $pais->nome));?>
+                      <?= form_input( array('name' => 'nome', 'type' => 'text', 'id' => 'nome', 'placeholder' => "Nome", 'required' => '', 'class' => 'form-control', ), set_value('nome', $row->nome));?>
                   </div>
               </div>
               <div class="modal-footer">

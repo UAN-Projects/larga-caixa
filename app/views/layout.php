@@ -212,12 +212,20 @@
 <script src="<?= base_url("assets/js/app.min.js")?>"></script>
 <script src="<?= base_url("assets/js/script.js")?>"></script>
 
-<?php if($this->session->flashdata('form_error') || validation_errors() ) { ?>
+<?php if(validation_errors() ) { ?>
+    <?php if( $method == 'index' ) { ?>
     <script>
         $(document).ready(function(){
-            $("#open-modal").click();
+            $("#createModal").click();
         });
     </script>
+    <?php } else if($method == 'update') { ?>
+    <script>
+        $(document).ready(function(){
+            $("#updateModal<?= $row->id?>").click();
+        });
+    </script>
+    <?php } ?>
 <?php } ?>
 
 </body>

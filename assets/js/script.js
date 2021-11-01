@@ -17,53 +17,11 @@ $(document).ready(function(){
             type: 'success'
         });
     }
-    if (accao == "login") {
-        new PNotify({
-            title: objecto,
-            text: mensagem,
-            type: 'success'
-        });
-    }
-    if (accao == "insert") {
-        new PNotify({
-            title: objecto,
-            text: mensagem,
-            type: 'success'
-        });
-    }
-    if (accao == "delete") {
-        new PNotify({
-            title: objecto,
-            text: mensagem,
-            type: 'success'
-        });
-    }
-    if (accao == "update") {
-        new PNotify({
-            title: objecto,
-            text: mensagem,
-            type: 'success'
-        });
-    }
     if (accao == "error") {
         new PNotify({
             title: objecto,
             text: mensagem,
             type: 'error'
-        });
-    }
-    if (accao == "migrate") {
-        new PNotify({
-            title: objecto,
-            text: mensagem,
-            type: 'success'
-        });
-    }
-    if (accao == "estado") {
-        new PNotify({
-            title: objecto,
-            text: mensagem,
-            type: 'success'
         });
     }
 

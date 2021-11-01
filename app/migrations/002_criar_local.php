@@ -13,6 +13,7 @@ class Migration_Criar_local extends CI_Migration {
 			'nome' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '20',
+				'unique' => TRUE
 			],
 			'created_at datetime default current_timestamp',
             'updated_at datetime on update current_timestamp'
@@ -30,6 +31,7 @@ class Migration_Criar_local extends CI_Migration {
 			'nome' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '20',
+				'unique' => TRUE
 			],
 			'created_at datetime default current_timestamp',
             'updated_at datetime on update current_timestamp'
@@ -47,6 +49,7 @@ class Migration_Criar_local extends CI_Migration {
 			'nome' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '20',
+				'unique' => TRUE
 			],
 			'created_at datetime default current_timestamp',
             'updated_at datetime on update current_timestamp'
