@@ -5,7 +5,7 @@ class Auth extends CI_Controller {
     public function index() {
         if($this->ion_auth->logged_in()) redirect('dashboard');
         $data = array('class' => strtolower(__CLASS__), 'method' => __FUNCTION__);
-        $this->load->view('auth', $data);
+        $this->load->view('layout_auth', $data);
     }
 
     public function login() {
@@ -19,7 +19,7 @@ class Auth extends CI_Controller {
             $this->session->set_tempdata('notify', __CLASS__.",login,Bem Vindo!!!", 1);
             redirect('dashboard');
         } else {
-            $this->session->set_flashdata('message', $this->ion_auth->errors());
+            $this->session->set_flashdata('form_error', $this->ion_auth->errors());
             redirect('auth');
         }
         redirect('auth');
@@ -58,11 +58,11 @@ class Auth extends CI_Controller {
                 $this->session->set_tempdata('notify', __CLASS__.",success, Bem Vindo!!!", 1);
                 redirect('auth');
             } else {
-                $this->session->set_flashdata('error', 'Erro ao salvar os dados');
+                $this->session->set_flashdata('form_error', $this->ion_auth->errors());
                 redirect('auth/register');
             }
         }
-		$this->load->view('auth', $data);
+		$this->load->view('layout_auth', $data);
     }
 
 }

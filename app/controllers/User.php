@@ -5,10 +5,11 @@ class User extends CI_Controller
 
     public function index()
     {
-        if($this->ion_auth->logged_in()) redirect('dashboard');
-        
-        $this->form_validation->set_rules('username', '', 'trim');
-        $this->form_validation->set_rules('first_name', '', 'trim|required');
+        if(!$this->ion_auth->logged_in()) redirect('');
+        $data = array('class' => strtolower(__CLASS__), 'method' => __FUNCTION__);
+
+        $this->form_validation->set_rules('username', 'UserName', 'required');
+        $this->form_validation->set_rules('first_name', 'Nome', 'required|is_unique[users.username]');
         $this->form_validation->set_rules('email', '', 'trim|required|is_unique[users.email]');
         $this->form_validation->set_rules('password', 'Senha', 'required|min_length[5]|max_length[255]');
         $this->form_validation->set_rules('confirm_password', 'Confirmar Senha', 'matches[password]');
@@ -21,31 +22,23 @@ class User extends CI_Controller
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'username' => $this->input->post('username'),
-
             );
-            $group = array($this->input->post('perfil_usuario'));
 
             $additional_data = $this->security->xss_clean($additional_data);
-
-            $group = $this->security->xss_clean($group);
+            $group = array(1);
 
             if ($this->ion_auth->register($username, $password, $email, $additional_data, $group)) {
-                $this->session->set_flashdata('sucess', 'Dados salvos com sucesso');
-                $this->load->view('auth', $data);
+                $this->session->set_tempdata('notify', __CLASS__.",success, Bem Vindo!!!", 1);
             } else {
-                $this->session->set_flashdata('error', 'Erro ao salvar os dados');
+                $this->session->set_flashdata('form_error', $this->ion_auth->errors());
             }
         }
-		$data = array('class' => strtolower(__CLASS__), 'method' => __FUNCTION__,
-			'users' => $this->ion_auth->users()->result()
+
+        $this->load->view('layout',
+            array_merge($data, 
+                array('users' => $this->ion_auth->users()->result()),
+            )
         );
-		$this->load->view('auth', $data);
-		// $this->load->view('layout', $data);
-        // $this->load->view('auth',
-        //     array_merge($data, 
-        //         array('users' => $this->ion_auth->users()->result()),
-        //     )
-        // );
     }
 
 	public function show($id=NULL) {

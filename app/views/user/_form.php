@@ -1,20 +1,15 @@
-<div class="col-md-8 col-lg-6 col-xl-5">
-    <div class="card">
-
-        <div class="card-body p-4">
-            
-            <div class="text-center w-75 m-auto">
-                <a href="index.html">
-                    <span><img src="<?= base_url("assets/images/logo-light.png")?>" alt="" height="22"></span>
-                </a>
-                <p class="text-muted mb-4 mt-3">Don't have an account? Create your own account, it takes less than a minute</p>
-            </div>
-
-            <?= form_open("auth/register"); ?>
-                <?php if( $this->session->flashdata('form_error')) { ?>
-                    <?= $this->session->flashdata('form_error'); ?>
-                <?php } ?>
-            
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Novo Utilizador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <?= form_open("$class/$method"); ?>
+        <?= validation_errors('<code>', '</code>'); ?>
+            <div class="modal-body">
                 <div class="form-group">
                     <label for="fullname">Nome</label>
                     <?= form_input( array('name' => 'first_name', 'type' => 'text', 'id' => 'first_name', 'placeholder' => "Nome", 'required' => '', 'class' => 'form-control', ), set_value('first_name'));?>
@@ -35,24 +30,15 @@
                     <label for="password">Confirmar Senha</label>
                     <?= form_password(array('name' => 'confirm_password', 'required' => '', 'id' => 'confirm_password', 'class' => 'form-control', 'placeholder'=>"Confirmar Senha"));?>
                 </div>
-
-                <div class="form-group mb-0 text-center">
-                    <button class="btn btn-primary btn-block" type="submit"> Sign Up </button>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <button type="reset" class="btn btn-danger waves-effect waves-light">Reset</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Submeter</button>
                 </div>
+            </div>
 
-            <?= form_close(); ?>
-
-        </div> <!-- end card-body -->
+        <?= form_close(); ?>
     </div>
-    <!-- end card -->
-
-    <div class="row mt-3">
-        <div class="col-12 text-center">
-            <p class="text-muted">Já tem uma conta?  <a href="<?= base_url("auth")?>" class="text-primary font-weight-medium ml-1">Sign In</a></p>
-        </div> <!-- end col -->
-    </div>
-    <!-- end row -->
-
-</div> <!-- end col -->
-
-
+  </div>
+</div>

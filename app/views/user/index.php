@@ -2,73 +2,55 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Scroll - Vertical</h4>
-                <p class="text-muted font-13 mb-4">
-                    This example shows the DataTables table body scrolling in the vertical direction. This can generally be seen as an
-                    alternative method to pagination for displaying a large table in a fairly small vertical area, and as such
-                    pagination has been disabled here (note that this is not mandatory, it will work just fine with pagination enabled
-                    as well!).
-                </p>
+				<div class="d-flex align-items-center justify-content-between mb-2">
+					<button type="button" class="btn btn-primary" id="open-modal" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="mdi mdi-plus-circle mr-1"></i> Add</button>
+					<h4 class="header-title">Utilizadores</h4>
+				</div>
 
-                <table id="scroll-vertical-datatable" class="table dt-responsive nowrap">
+                <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>status</th>
+                            <th>Ultimo Login</th>
+                            <th class="text-right">Acção</th>
                         </tr>
                     </thead>
                 
                 
                     <tbody>
+					<?php foreach ($users as $user): ?>
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
+                            <td> <?= $user->first_name?> </td>
+                            <td> <?= $user->email?> </td>
+                            <td> <?= ($user->active)? 'ativo' : 'desativo' ?> </td>
+                            <td> <?= date("Y-m-d H:i:s", $user->last_login); ?> </td>
+                            <td class="text-right">
+								<div class="btn-group">
+									<button 
+										class="btn btn-primary btn-sm dropdown-toggle" 
+										type="button" 
+										data-toggle="dropdown" 
+										aria-haspopup="true" 
+										aria-expanded="false"
+									>Acções
+									</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="#">Another action</a>
+									</div>
+								</div>
+							</td>
                         </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Donna Snider</td>
-                            <td>Customer Support</td>
-                            <td>New York</td>
-                            <td>27</td>
-                            <td>2011/01/25</td>
-                            <td>$112,000</td>
-                        </tr>
+					<?php endforeach;  ?>
                     </tbody>
                 </table>
-
+                
             </div> <!-- end card body-->
         </div> <!-- end card -->
     </div><!-- end col-->
-    </div>
-    <!-- end row-->
+</div>
+<!-- end row-->
+
+<?php require('_form.php'); ?>

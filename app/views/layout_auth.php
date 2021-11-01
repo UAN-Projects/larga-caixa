@@ -9,6 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
+        
         <link rel="stylesheet" href="<?= base_url("assets/css/bootstrap.min.css")?>" />
 		<link rel="stylesheet" href="<?= base_url("assets/css/icons.min.css")?>" />
 		<link rel="stylesheet" href="<?= base_url("assets/css/app.min.css")?>" />

@@ -9,8 +9,8 @@
                 </a>
                 <p class="text-muted mb-4 mt-3">Por favor entre com seu login/email e senha abaixo.</p>
                 <p>
-                <?php if( $this->session->flashdata('message')) { ?>
-                    <?= $this->session->flashdata('message'); ?>
+                <?php if( $this->session->flashdata('form_error')) { ?>
+                    <?= $this->session->flashdata('form_error'); ?>
                 <?php } ?>
                 </p>
             </div>

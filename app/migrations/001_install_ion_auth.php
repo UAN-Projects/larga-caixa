@@ -207,7 +207,6 @@ class Migration_Install_ion_auth extends CI_Migration {
 	}
 
 	public function down() {
-		echo 'Down';
 		$this->dbforge->drop_table($this->tables['users'], TRUE);
 		$this->dbforge->drop_table($this->tables['groups'], TRUE);
 		$this->dbforge->drop_table($this->tables['users_groups'], TRUE);
