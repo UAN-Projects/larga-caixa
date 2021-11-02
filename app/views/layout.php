@@ -61,6 +61,10 @@
                               <i class="remixicon-account-circle-line"></i>
                               <span>Perfil</span>
                           </a>
+                          <a href="<?= base_url('user/generateToken'); ?>" class="dropdown-item notify-item">
+                              <i class="remixicon-account-circle-line"></i>
+                              <span>Gerer Token</span>
+                          </a>
 
                           <div class="dropdown-divider"></div>
 
@@ -143,7 +147,7 @@
                           </a>
                           <ul class="submenu">
                               <li>
-                                  <a href="<?= base_url(''); ?>"> Arquivos </a>
+                                  <a href="<?= base_url('ficheiro'); ?>"> Arquivos </a>
                               </li>
                           </ul>
                       </li>

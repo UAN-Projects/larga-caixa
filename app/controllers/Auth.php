@@ -27,7 +27,7 @@ class Auth extends CI_Controller {
 
     public function logout() {
         $this->ion_auth->logout();
-		redirect('');
+		redirect();
     }
 
     public function register()

@@ -4,34 +4,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Service extends CI_Controller {
 
+    public $hello = 'ola';
+
 	public function __construct()
 	{        
 		parent::__construct();
+        // $this->load->model('Ficheiro_model');
 		$this->load->library("nusoap"); 
         $this->server = new soap_server();
         $ns = "http://{$_SERVER['HTTP_HOST']}/service.php";
         $this->server->configureWSDL('LargaCaixa', $ns,'','document');
 
-        $this->server->register("hello",
-            array("username" => "xsd:string"),
-            array("return" => "xsd:string"),
-            $ns,
-            "",
-            "",
-            "",
-            "say hi to the caller"
-        );
-        $this->server->register("ola",
-            array(),
-            array("return" => "xsd:string"),
-            $ns,
-            "",
-            "",
-            "",
-            "say hi to the caller"
-        );
         $this->server->wsdl->addComplexType(
-            'intArray',
+            'file',
+            'complextType',
+            'struct',
+            'sequence',
+            '',
+            array(
+                'descricao' => array('name' => 'descricao', 'type' => 'xsd:string'),
+                'preco' => array('name' => 'preco', 'type' => 'xsd:string'),
+                'ficheiro' => array('name' => 'file', 'type' => 'xsd:string'),
+                'data' => array('name' => 'date', 'type' => 'xsd:string')
+            )
+        );
+    
+        $this->server->wsdl->addComplexType(
+            'books',
             'complexType',
             'array',
             '',
@@ -40,81 +39,69 @@ class Service extends CI_Controller {
             array(
                 array(
                     'ref' => 'SOAP-ENC:arrayType',
-                    'wsdl:arrayType' => 'xsd:integer[]'
+                    'wsdl:arrayType' => 'tns:file[]'
                 )
             ),
-            'xsd:integer'
+            'tns:file'
         );
-        
-        $this->server->register("intCount",
-            array("from" => "xsd:integer", "to" => "xsd:integer"),
-            array("return" => "tns:intArray"),
+
+        $this->server->register("files",
+            array(),
+            array("return" => "tns:books"),
             $ns,
             "",
             "",
             "",
-            "count from 'from' to 'to'"
+            "get list of files"
         );
-        
-        
-        
-        $this->server->wsdl->addComplexType(
-            'userInfo',
-            'complextType',
-            'struct',
-            'sequence',
-            '',
-            array(
-                'id' => array('name' => 'id', 'type' => 'xsd:integer'),
-                'username' => array('name' => 'username', 'type' => 'xsd:string'),
-                'email' => array('name' => 'email', 'type' => 'xsd:string')
-            )
-        );
-        
-        $this->server->register("getUserInfo",
-            array("userId" => "xsd:integer"),
-            array("return" => "tns:userInfo"),
+        $this->server->register("hello",
+            array(),
+            array("return" => "xsd:string"),
             $ns,
             "",
             "",
             "",
-            "get info for user"
+            "say hi to the caller"
         );
 	}
 	public function index()
 	{	
-        function hello($username) {
-            if ($username == 'admin') {
-                return "Welcome back, Boss";
-            } else {
-                return "Hello, $username";
-            }
+        function hello() {
+            ini_set("soap.wsdl_cache_enabled", "0");
+            $this->hello;
+            // $files = $this->Ficheiro_model->list();
+            // return $files[0]->id;
+            // return $this->hello;
+            return 'Hello';
         }
 
-        function ola() {
-            return "Hello!!!";
-        }
-        // Example "intCount" function (return array)
-        function intCount($from, $to) {
-            $out = array();
-            for ($i = $from; $i <= $to; $i++) {
-                $out[] = $i;
-            }
-            return $out;
+        function files() {
+            $result = array();
+            // $files = $this->Ficheiro_model->list();
+            // foreach ($files as $file) {
+            //     $result = array_merge($result, 
+            //         array(
+            //             array( 
+            //                 'descricao' => $file->descricao, 
+            //                 'preco' => $file->preco,
+            //                 'ficheiro' => "http://{$_SERVER['HTTP_HOST']}/uploads/ficheiros/".$file->ficheiro,
+            //                 'data' => $file->created_at,
+            //             ),
+            //         )
+            //     );
+            // }
+            // return $result;
+            $this->load->model('Ficheiro_model');
+            return array(
+                array( 
+                    'descricao' => '$file->descricao', 
+                    'preco' => '$file->preco',
+                    'ficheiro' => "http://{$_SERVER['HTTP_HOST']}/uploads/ficheiros/".'$file->ficheiro',
+                    'data' => '$file->created_at',
+                ),
+            );
         }
 
-        // Example "getUserInfo" function (return struct and fault)
-        function getUserInfo($userId) {
-            if ($userId == 1) {
-                return array(
-                    'id' => 1,
-                    'username' => 'testuserCI',
-                    'email' => 'testuser.ci@example.com'
-                );
-            } else {
-                return new soap_fault('SOAP-ENV:Server', '', 'Requested user not found', '');
-            }
-        }
         $this->server->service(file_get_contents("php://input"));
 	}
 }

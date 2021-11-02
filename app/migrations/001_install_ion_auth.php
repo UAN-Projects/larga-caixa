@@ -57,6 +57,12 @@ class Migration_Install_ion_auth extends CI_Migration {
 				'constraint' => '254',
 				'unique' => TRUE
 			],
+			'token' => [
+				'type'       => 'VARCHAR',
+				'constraint' => '254',
+				'unique' 	 => TRUE,
+				'null'       => TRUE
+			],
 			'activation_selector' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '255',

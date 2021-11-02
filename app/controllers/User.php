@@ -7,7 +7,7 @@ class User extends CI_Controller
     public function __construct() {
         parent::__construct();
         if(!$this->ion_auth->logged_in()) redirect();
-        if(!$this->ion_auth->is_admin()) redirect();
+        // if(!$this->ion_auth->is_admin()) redirect();
         $this->data['class'] = strtolower(__CLASS__);
     }
 
@@ -81,6 +81,17 @@ class User extends CI_Controller
         }
         $this->data['items'] = $this->ion_auth->users()->result();
         $this->load->view('layout', $this->data);
+    }
+
+    public function generateToken()
+    {
+        $user_id = $this->ion_auth->user()->row()->id;
+        if($this->ion_auth->update($user_id, array('token' => base64_encode(date('Y_m_d_H_i_s'))))) {
+            $this->session->set_tempdata('notify', __CLASS__.",success, Sucesso!", 1);
+        } else {
+            $this->session->set_tempdata('notify', __CLASS__.",error, Erro!", 1);
+        }
+        $this->show($user_id);
     }
 
 
