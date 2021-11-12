@@ -133,4 +133,4 @@ $autoload['language'] = array('auth');
 */
 $autoload['model'] = array();
 
-(ENVIRONMENT == "production")? Dotenv\Dotenv::createImmutable(FCPATH,'.env')->load() : Dotenv\Dotenv::createImmutable(FCPATH,'.env')->load();
+// (ENVIRONMENT == "production")? Dotenv\Dotenv::createImmutable(FCPATH,'.env')->load() : Dotenv\Dotenv::createImmutable(FCPATH,'.env')->load();

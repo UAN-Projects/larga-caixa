@@ -2,7 +2,7 @@
     require('app/libraries/nusoap/nusoap.php');
     
     function conexao() {
-        return new PDO('mysql:host=127.0.0.1:3306;dbname=larga_caixa', "edvaldo", "vander");
+        return new PDO('mysql:host=127.0.0.1:3307;dbname=larga_caixa', "edvaldo", "vander");
     }
 
     function files($token) {
@@ -38,10 +38,16 @@
 
         $user = $stmt->fetch();
         if($user) {
+            // echo $user['token'];
             return $user['token'];
         } else {
+            // echo "Error ao tentar pegar o token!";
             return "Error ao tentar pegar o token!";
         }
+    }
+
+    function hello() {
+        return "Welcome back, Boss";
     }
 
     $server = new soap_server();
@@ -99,5 +105,18 @@
         "get token from User"
     );
 
+    $server->register("hello",
+        array(),
+        array("return" => "xsd:string"),
+        $ns,
+        "",
+        "",
+        "",
+        "say hi to the caller"
+    );
+
     $server->service(file_get_contents("php://input"));
+
+    // $result = getToken('edvaldo');
+    // print_r($result);
 ?>
