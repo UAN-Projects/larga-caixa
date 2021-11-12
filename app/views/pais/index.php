@@ -36,7 +36,6 @@
 									</button>
 									<div class="dropdown-menu">
 										<a class="dropdown-item" href="<?= base_url("$class/show/$item->id"); ?>">Visualizar</a>
-										<a class="dropdown-item" href="#" id="updateModal<?= $item->id ?>" data-toggle="modal" data-target="#update<?= $item->id ?>" data-whatever="@mdo">Editar</a>
 										<a class="dropdown-item text-danger" href="<?= base_url("$class/delete/$item->id"); ?>">Eliminar</a>
 									</div>
 								</div>
@@ -53,4 +52,3 @@
 <!-- end row-->
 
 <?php require('_new.php'); ?>
-<?php require('_edit.php'); ?>

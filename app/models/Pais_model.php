@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('Acção não permitida');
 
 class Pais_model extends CI_Model {
     
