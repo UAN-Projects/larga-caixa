@@ -21,7 +21,7 @@ class Ficheiro extends CI_Controller
             $create_data = elements(array('descricao', 'preco'), $this->security->xss_clean($this->input->post()));
 
             $config['upload_path'] = './uploads/ficheiros/';
-            $config['allowed_types'] = 'jpg|png';
+            $config['allowed_types'] = 'jpg|png|mp3|mp4';
             $config['max_size']     = '1000';
             $config['max_width'] = '10240';
             $config['max_height'] = '7680';
