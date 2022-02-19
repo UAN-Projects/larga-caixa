@@ -24,11 +24,17 @@
           $stmt2->execute(array('token' => $token));
           $ficheiros2 = $stmt2->fetchAll();
 
+          $stmt3 = $conn->prepare(
+            "SELECT ficheiros.id, ficheiros.descricao, ficheiros.preco, ficheiros.ficheiro, ficheiros.created_at from ficheiros");
+          $stmt3->execute();
+          $ficheiros3 = $stmt3->fetchAll();
+
         $files = [];
         foreach ($ficheiros as $ficheiro) {
             foreach ($ficheiros2 as $ficheiro2) {
                 if($ficheiro2['id'] != $ficheiro['id'] ) {
                     array_push($files,array(
+                        'if' => $ficheiro['id'], 
                         'descricao' => $ficheiro['descricao'], 
                         'preco' => $ficheiro['preco'],
                         'ficheiro' => "http://{$_SERVER['HTTP_HOST']}/uploads/ficheiros/".$ficheiro['ficheiro'],
@@ -48,9 +54,28 @@
                 'data' => $ficheiro2['created_at'],
             ));
         }
+
+        $allFiles = [];
+
+        foreach ($ficheiros3 as $ficheiro3) {
+            $access = false;
+            foreach ($files as $file) {
+                if($ficheiro3['id'] == $file['id'] ) {
+                    $access = true;
+                }
+            }   
+            array_push($allFiles,array(
+                'descricao' => $ficheiro3['descricao'], 
+                'preco' => $ficheiro3['preco'],
+                'ficheiro' => $access ? "http://{$_SERVER['HTTP_HOST']}/uploads/ficheiros/".$ficheiro3['ficheiro'] : '',
+                'link' => "http://{$_SERVER['HTTP_HOST']}/ficheiro/".$ficheiro3['id'],
+                'data' => $ficheiro3['created_at'],
+            ));
+            // $access = false;
+        }
         
         $return = array();
-        foreach ($files as $file) {
+        foreach ($allFiles as $file) {
             $return = array_merge($return, 
                 array(
                     array( 
