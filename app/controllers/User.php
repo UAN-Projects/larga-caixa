@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') or exit('Acção não permitida');
 
-class User extends CI_Controller
-{
-    protected $data = [];
+require('BaseController.php');
+
+class User extends BaseController {
 
     public function __construct() {
         parent::__construct();
@@ -54,6 +54,7 @@ class User extends CI_Controller
 
     public function update($id = NULL)
     {
+        $this->data['method'] = 'show';
         if($this->ion_auth->user()->row()->id != $id) {
             $this->session->set_tempdata('notify', __CLASS__.",error, Não tem permissão para executar essa operação!", 1);
             redirect();
@@ -79,7 +80,7 @@ class User extends CI_Controller
                 $this->session->set_tempdata('notify', __CLASS__.",error, Erro!", 1);
             }
         }
-        $this->data['items'] = $this->ion_auth->users()->result();
+        $this->data['item'] = $this->ion_auth->user($id)->row();
         $this->load->view('layout', $this->data);
     }
 

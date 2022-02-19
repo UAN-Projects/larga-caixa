@@ -2,45 +2,45 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-				<div class="d-flex align-items-center justify-content-between mb-2">
-					<button type="button" class="btn btn-primary" id="createModalId" data-toggle="modal" data-target="#createModal" data-whatever="@mdo"><i class="mdi mdi-plus-circle mr-1"></i> Adicionar</button>
-					<h4 class="header-title"><?= $class ?></h4>
-				</div>
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <button type="button" class="btn btn-primary" id="createModalId" data-toggle="modal" data-target="#createModal" data-whatever="@mdo"><i class="mdi mdi-plus-circle mr-1"></i> Adicionar</button>
+                    <h4 class="header-title"><?= $class ?></h4>
+                </div>
 
                 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
                     <thead>
                         <tr>
-                            <th>Utilizador</th>
+                            <th>Criado por: </th>
                             <th>Preço</th>
-                            <th>Preço</th>
+                            <th>Ficheiro</th>
                             <th class="text-right">Acção</th>
                         </tr>
                     </thead>
                 
                     <tbody>
-					<?php foreach ($items as $item): ?>
+                    <?php foreach ($items as $item): ?>
                         <tr>
-                            <td> <?= $this->ion_auth->user($this->ion_auth->user()->row()->id)->row()->first_name; ?> </td>
-                            <td> <?= $item->preco; ?> </td>
+                            <td> <?= $this->ion_auth->user($item['user_id'])->row()->first_name; ?> </td>
+                            <td> <?= $item['preco']; ?> </td>
+                            <td> <?= $item['ficheiro']; ?> </td>
                             <td class="text-right">
-								<div class="btn-group">
-									<button 
-										class="btn btn-primary btn-sm dropdown-toggle" 
-										type="button" 
-										data-toggle="dropdown" 
-										aria-haspopup="true" 
-										aria-expanded="false"
-									> Acções
-									</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="<?= base_url("$class/show/$item->id"); ?>">Visualizar</a>
-										<a class="dropdown-item" href="#" id="updateModal<?= $item->id ?>" data-toggle="modal" data-target="#update<?= $item->id ?>" data-whatever="@mdo">Editar</a>
-										<a class="dropdown-item text-danger" href="<?= base_url("$class/delete/$item->id"); ?>">Eliminar</a>
-									</div>
-								</div>
-							</td>
+                                <div class="btn-group">
+                                    <button 
+                                        class="btn btn-primary btn-sm dropdown-toggle" 
+                                        type="button" 
+                                        data-toggle="dropdown" 
+                                        aria-haspopup="true" 
+                                        aria-expanded="false"
+                                    > Acções
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <?php $file_id = $item['id']; ?>
+                                        <a class="dropdown-item" href="<?= base_url("$class/show/$file_id"); ?>">Visualizar</a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
-					<?php endforeach;  ?>
+                    <?php endforeach;  ?>
                     </tbody>
                 </table>
                 
@@ -51,5 +51,5 @@
 <!-- end row-->
 
 <?php require('_new.php'); ?>
-<?php require('_edit.php'); ?>
+
 

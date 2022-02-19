@@ -85,4 +85,38 @@ class Core_model extends CI_Model {
             return FALSE;
         }
     }
+
+    public function getFiles($userId = NULL) {
+        $this->db->select('ficheiros.id, ficheiros.ficheiro');
+        $this->db->from('ficheiros');
+        $this->db->join('users_ficheiros', 'ficheiros.id = users_ficheiros.ficheiro_id');
+        return $this->db->where(array('ficheiros.user_id' => $userId))->limit(1)->get()->row();
+    }
+
+    public function hasAccess($fileId, $userId) {
+        $this->db->from('users_ficheiros');
+        return $this->db->where(array('user_id' => $userId, 'ficheiro_id' => $fileId))->limit(1)->get()->row();
+    }
+
+    public function getFilesAccess($user_id) {
+        $ficheiros = [];
+        $getFiles = $this->db->get('ficheiros')->result();
+
+        foreach ($getFiles as $getFile) {
+            $fileAccess = $this->hasAccess($getFile->id, $user_id);
+            if($getFile->user_id == $user_id || $fileAccess) {
+                array_push($ficheiros,array(
+                    'user_id' => $getFile->user_id,
+                    'preco' => $getFile->preco,
+                    'ficheiro' => $getFile->ficheiro,
+                    'id' => $getFile->id,
+                ));
+            }
+        }
+        return $ficheiros;
+    }
 }
+
+
+
+

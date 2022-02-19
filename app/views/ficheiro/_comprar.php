@@ -1,18 +1,21 @@
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Novo <?= __CLASS__ ?></h5>
+        <h5 class="modal-title" id="exampleModalLabel">Comprar</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <?= form_open("$class/$method"); ?>
+
+      <?= form_open_multipart("$class/buy/$item->id");?>
         <?= validation_errors('<code>', '</code>'); ?>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="fullname">Nome</label>
-                    <?= form_input( array('name' => 'nome', 'type' => 'text', 'id' => 'nome', 'placeholder' => "Nome", 'required' => '', 'class' => 'form-control', ), set_value('nome'));?>
+                    <label for="fullname">Conta</label>
+                    <?= form_input( array('name' => 'conta_origem', 'type' => 'text', 'id' => 'conta_destino', 'placeholder' => "1001", 'class' => 'form-control', ), set_value('conta_destino'));?>
+                    <?=form_hidden('conta_destino', $item->conta);?>
+                    <?=form_hidden('valor', $item->preco);?>
                 </div>
             </div>
             <div class="modal-footer">

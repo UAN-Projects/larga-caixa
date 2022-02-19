@@ -48,7 +48,6 @@
 
                   <li class="dropdown notification-list">
                       <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                          <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                           <span class="pro-user-name ml-1">
                               <?= $this->ion_auth->user()->row()->first_name; ?>
                                 <i class="mdi mdi-chevron-down"></i> 
@@ -57,7 +56,7 @@
                       <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 
                           <!-- item-->
-                          <a href="javascript:void(0);" class="dropdown-item notify-item">
+                          <a href="<?= base_url("user/show/$user_corrent"); ?>" class="dropdown-item notify-item">
                               <i class="remixicon-account-circle-line"></i>
                               <span>Perfil</span>
                           </a>
@@ -119,25 +118,9 @@
                                     <li>
                                         <a href="<?= base_url('user'); ?>">Utilizadores</a>
                                     </li>
-                                    <li>
-                                        <a href="<?= base_url('permissoes'); ?>">Permissões</a>
-                                    </li>
                                 </ul>
                             </li>
-                            <li class="has-submenu">
-                                <a href="#">Localização <div class="arrow-down"></div></a>
-                                <ul class="submenu">
-                                    <li>
-                                        <a href="<?= base_url('pais'); ?>">Paises</a>
-                                    </li>
-                                    <li>
-                                        <a href="<?= base_url('provincia'); ?>">Provincias</a>
-                                    </li>
-                                    <li>
-                                        <a href="<?= base_url('municipio'); ?>">Municipios</a>
-                                    </li>
-                                </ul>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -147,7 +130,8 @@
                           </a>
                           <ul class="submenu">
                               <li>
-                                  <a href="<?= base_url('ficheiro'); ?>"> Arquivos </a>
+                                  <a href="<?= base_url('ficheiro/list'); ?>"> Arquivos </a>
+                                  <a href="<?= base_url('ficheiro'); ?>"> Meus Arquivos </a>
                               </li>
                           </ul>
                       </li>
