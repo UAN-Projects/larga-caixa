@@ -82,10 +82,10 @@
               <div class="logo-box">
                   <a href="<?= base_url(); ?>" class="logo text-center">
                       <span class="logo-lg">
-                          <img src="assets/images/logo-light.png" alt="" height="20">
+                          <span> <h2> Larga Caixa </h2> </span>
                       </span>
                       <span class="logo-sm">
-                          <img src="assets/images/logo-sm.png" alt="" height="24">
+                          <span> <h2> Larga Caixa </h2> </span>
                       </span>
                   </a>
               </div>

@@ -37,8 +37,8 @@
                         'if' => $ficheiro['id'], 
                         'descricao' => $ficheiro['descricao'], 
                         'preco' => $ficheiro['preco'],
-                        'ficheiro' => "http://{$_SERVER['HTTP_HOST']}/uploads/ficheiros/".$ficheiro['ficheiro'],
-                        'link' => "http://{$_SERVER['HTTP_HOST']}/ficheiro/".$ficheiro['id'],
+                        'ficheiro' => "uploads/ficheiros/".$ficheiro['ficheiro'],
+                        'link' => "ficheiro/".$ficheiro['id'],
                         'data' => $ficheiro['created_at'],
                     ));
                 }
@@ -50,11 +50,13 @@
                 'id' => $ficheiro2['id'], 
                 'descricao' => $ficheiro2['descricao'], 
                 'preco' => $ficheiro2['preco'],
-                'ficheiro' => "http://{$_SERVER['HTTP_HOST']}/uploads/ficheiros/".$ficheiro2['ficheiro'],
-                'link' => "http://{$_SERVER['HTTP_HOST']}/ficheiro/".$ficheiro2['id'],
+                'ficheiro' => "uploads/ficheiros/".$ficheiro2['ficheiro'],
+                'link' => "ficheiro/".$ficheiro2['id'],
                 'data' => $ficheiro2['created_at'],
             ));
         }
+
+        print_r($files);
 
         $allFiles = [];
         foreach ($ficheiros3 as $ficheiro3) {
@@ -62,13 +64,14 @@
             foreach ($files as $file) {
                 if($ficheiro3['id'] == $file['id'] ) {
                     $access = true;
+                    print_r($access);
                 }
             }   
             array_push($allFiles,array(
                 'descricao' => $ficheiro3['descricao'], 
                 'preco' => $ficheiro3['preco'],
-                'ficheiro' => $access ? "http://{$_SERVER['HTTP_HOST']}/uploads/ficheiros/".$ficheiro3['ficheiro'] : '',
-                'link' => "http://{$_SERVER['HTTP_HOST']}/ficheiro/".$ficheiro3['id'],
+                'ficheiro' => "uploads/ficheiros/".$ficheiro3['ficheiro'],
+                'link' => "ficheiro/".$ficheiro3['id'],
                 'data' => $ficheiro3['created_at'],
             ));
             // $access = false;
@@ -88,78 +91,13 @@
                 )
             );
         }
-        return $return;
+        // return $return;
+        print_r($return);
     }
     
-    function getToken($username) {
-        $conn = conexao();
-        $stmt = $conn->prepare(
-          "SELECT users.token FROM users WHERE users.username = :username ");
-        $stmt->execute(array('username' => $username));
 
-        $user = $stmt->fetch();
-        if($user) {
-            return $user['token'];
-        } else {
-            return "Error ao tentar pegar o token!";
-        }
-    }
 
-    $server = new soap_server();
-    $ns = "http://{$_SERVER['HTTP_HOST']}/server.php";
-    $server->configureWSDL('Larga Caixa', $ns,'','document');
 
-    
-    $server->wsdl->addComplexType(
-        'file',
-        'complextType',
-        'struct',
-        'sequence',
-        '',
-        array(
-            'descricao' => array('name' => 'descricao', 'type' => 'xsd:string'),
-            'preco' => array('name' => 'preco', 'type' => 'xsd:string'),
-            'ficheiro' => array('name' => 'file', 'type' => 'xsd:string'),
-            'link' => array('name' => 'file', 'type' => 'xsd:string'),
-            'data' => array('name' => 'data', 'type' => 'xsd:string')
-        )
-    );
-
-    $server->wsdl->addComplexType(
-        'books',
-        'complexType',
-        'array',
-        '',
-        'SOAP-ENC:Array',
-        array(),
-        array(
-            array(
-                'ref' => 'SOAP-ENC:arrayType',
-                'wsdl:arrayType' => 'tns:file[]'
-            )
-        ),
-        'tns:file'
-    );
-
-    $server->register("files",
-        array("token" => "xsd:string"),
-        array("return" => "tns:books"),
-        $ns,
-        "",
-        "",
-        "",
-        "get list of files"
-    );
-    
-    $server->register("getToken",
-        array("username" => "xsd:string"),
-        array("return" => "xsd:string"),
-        $ns,
-        "",
-        "",
-        "",
-        "get token from User"
-    );
-
-    $server->service(file_get_contents("php://input"));
+    // $server->service(file_get_contents("php://input"));
+    files('MjAyMl8wMl8xOV8xMl8xOF80Nw==');
 ?>

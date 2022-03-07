@@ -22,8 +22,6 @@ class Migration_Criar_ficheiro extends CI_Migration {
 			'conta' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '4',
-				'unique' 	 => TRUE,
-				'null'       => TRUE
 			],
 			'ficheiro' => [
 				'type'       => 'VARCHAR',

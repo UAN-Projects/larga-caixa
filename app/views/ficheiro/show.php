@@ -50,6 +50,16 @@
                     </div> <!-- end col -->
                 </div> 
             </div>
+
+            <div class="card-body">
+                <?php if($this->Core_model->hasAccess($item->id, $user_corrent) || $this->Core_model->get('ficheiros', array('user_id' => $user_corrent, 'id' => $item->id)) ) { ?>
+                    <div class="row m-0 p-1">
+                        <div class="offset-3 col-sm-6">
+                            <img src="<?= "/uploads/ficheiros/$item->ficheiro" ?>" alt="" width=600px>
+                        </div>
+                    </div> 
+                <?php } ?>
+            </div>
             
             <div class="card-footer">
                 <div class="d-flex align-items-center justify-content-end m-0 p-0">

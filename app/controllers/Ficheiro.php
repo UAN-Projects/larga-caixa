@@ -41,7 +41,7 @@ class Ficheiro extends BaseController {
                 $data = $this->upload->data();
                 $create_data['user_id'] = $this->ion_auth->user()->row()->id;
                 $create_data['ficheiro'] = $data['file_name'];
-
+                print_r($create_data );
                 $insertedId = $this->Core_model->insert($this->table, $create_data);
                 if ($insertedId) {
                     $this->session->set_tempdata('notify', __CLASS__.",success, Sucesso!", 1);
